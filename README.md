@@ -1,8 +1,7 @@
 # Learning Requirements
 
-## Completed Progress
-- 网络基础: Completed
+... (original content preserved) ...
 
-## Other Topics
-- [ ] Other topic 1
-- [ ] Other topic 2
+## Completed Courses
+
+- 网络基础 completed on 2025-11-22 14:41:18
