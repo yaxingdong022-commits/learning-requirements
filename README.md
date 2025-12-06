@@ -36,11 +36,12 @@
 |-----|------|------|
 | Day 1 | 基础爬虫：选择器、提取数据 | ✅ 已完成 |
 | Day 2 | 自动翻页 | ✅ 已完成 |
-| Day 3 | 跟踪详情页 | 🔄 进行中 |
-| Day 4 | Items + Pipelines | ⬜ |
-| Day 5 | Settings + 反爬 | ⬜ |
-| Day 6 | Ajax 接口 | ⬜ |
-| Day 7 | Playwright 动态渲染 | ⬜ |
+| Day 3 | 跟踪详情页 | ✅ 已完成 |
+| Day 4 | Items + Pipelines | ✅ 已完成 |
+| Day 5 | Settings + 反爬 | ✅ 已完成 |
+| Day 6 | Ajax 接口 | ✅ 已完成 |
+| Day 7 | Middleware 中间件 + 随机 UA | ✅ 已完成 |
+| Day 8 | 代理 IP | ⬜ |
 | ...   | ...  | ... |
 
 ---
@@ -162,6 +163,38 @@ def parse_author(self, response, text):
         "author_born": response.css(".author-born-date::text").get(),
     }
 ```
+
+### Day 7：Middleware 随机 UA
+
+```python
+# middlewares.py
+from fake_useragent import UserAgent
+
+
+class RandomUserAgentMiddleware:
+    def __init__(self):
+        self.ua = UserAgent()
+
+    def process_request(self, request, spider):
+        request.headers['User-Agent'] = self.ua.random
+```
+
+```python
+# settings.py
+DOWNLOADER_MIDDLEWARES = {
+    "项目名.middlewares.RandomUserAgentMiddleware": 400,
+}
+```
+
+---
+
+## Middleware 速查表
+
+| 方法 | 调用时机 | 参数 |
+|-----|---------|------|
+| `process_request` | 请求发出前 | `(self, request, spider)` |
+| `process_response` | 响应返回后 | `(self, request, response, spider)` |
+| `process_exception` | 发生异常时 | `(self, request, exception, spider)` |
 
 ---
 
